@@ -1,0 +1,80 @@
+@import '../../stylesheets/main-colors';
+@import '../../stylesheets/fonts';
+
+.header {
+  &__container{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    background-color: $light-mint;
+    padding: 0.75rem;
+    }
+  &__nav-controls{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+  }
+  &__title{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    font-family: $font-arvo;
+    font-weight: bold;
+    h2{
+      margin: 0 0 0 1rem;
+      font-size: 2rem;
+      line-height: 4rem;
+      &:hover{
+        color: $light-warm;
+      }
+    }
+    img{
+      width: 4rem;
+      height: 4rem;
+    }
+  }
+  &__link{
+    font-size: 1.25rem;
+    & a.active{
+      color: $ocean;
+    }
+  }
+}
+
+ul{
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+  margin: 0 0 0 1rem;
+  li {
+    margin: 0 0.5rem;
+    list-style: none;
+  }
+}
+a {
+  color: $light-warm;
+  text-decoration: none;
+  line-height: 64px;
+}
+.profile-image{
+  width: 3rem;
+  height: 3rem;
+  border-radius: 100%;
+}
+
+.dropdown-toggle.nav-link{
+  padding: 0;
+  &::after{
+    display: none !important;
+  }
+}
+.dropdown-menu{
+  background-color: $ocean;
+  width: fit-content;
+  min-width: 8rem;
+  max-width: 8rem;
+}
+.dropdown-item{
+  color: $light-warm;
+  line-height: 2rem;
+}
