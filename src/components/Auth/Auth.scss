@@ -1,0 +1,23 @@
+@import "../../stylesheets/buttons";
+.auth{
+  &__container{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding-top: 2rem;
+    .btn-container{
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1rem;
+    }
+  }
+  &__form{
+    display: flex;
+    flex-direction: column;
+    width: 15%;
+    label:not(:first-child) {
+      margin-top: 1rem;
+    }
+  }
+
+}

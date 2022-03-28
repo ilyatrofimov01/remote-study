@@ -1,0 +1,32 @@
+@import "main-colors";
+
+.btn-outline-primary {
+  border-color: $ocean;
+  color: $ocean;;
+
+  &:hover {
+    color: #fff;
+    background-color: $ocean;
+    border-color: $ocean;
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 0.25rem rgba($ocean, 0.5);
+  }
+}
+
+.btn-outline-success {
+  border-color: $light-mint;
+  color: $light-mint;;
+
+  &:hover {
+    color: #fff;
+    background-color: $light-mint;
+    border-color: $light-mint;
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 0.25rem rgba($light-mint, 0.5);
+    opacity: 0.5;
+  }
+}
