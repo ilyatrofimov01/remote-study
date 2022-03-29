@@ -1,10 +1,15 @@
-import React  from "react";
+import React from "react";
 import { NavDropdown } from "react-bootstrap";
 import { logo, noProfileImage } from "../../assets/img";
 import { NavLink } from "react-router-dom";
 import "./Header.scss";
+import { useDispatch } from "react-redux";
 
 export const Header = () => {
+  const dispatch = useDispatch();
+  const onLogOut = () => {
+    //dispatch()
+  };
 
   return (
     <nav className="header__container">
@@ -15,7 +20,7 @@ export const Header = () => {
         </NavLink>
         <ul>
           <li className="header__link">
-            <NavLink to={"/"}> Main </NavLink>
+            <NavLink to={"/"}> Home </NavLink>
           </li>
           <li className="header__link">
             <NavLink to={"/videos"}> Videos </NavLink>
@@ -28,15 +33,14 @@ export const Header = () => {
 
       <NavDropdown
         title={
-            <img src={noProfileImage} className="profile-image" alt="profile image" />
+          <img src={noProfileImage} className="profile-image" alt="profile image" />
         }
       >
         <NavDropdown.Item>My Profile</NavDropdown.Item>
         <NavDropdown.Item>Settings</NavDropdown.Item>
         <NavDropdown.Divider />
-        <NavDropdown.Item>Log out</NavDropdown.Item>
+        <NavDropdown.Item onClick={() => onLogOut()}>Log out</NavDropdown.Item>
       </NavDropdown>
-
     </nav>
   );
 };

@@ -1,44 +1,60 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { validationRules } from "./validationRules";
 import { AuthFields, AuthService } from "../../services/Auth/AuthService";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../redux/reducers/User/actions";
 import "./Auth.scss";
 
+type FormField = "email" | "password"
 
-const initialFormState = {email: "", password: ""};
 
 export const Auth = () => {
-  const [formFields, setFormFields] = useState<AuthFields>(initialFormState);
-  const [isLogIn, setIsLogin] = useState<boolean>(false);
-  //const { register, handleSubmit } = useForm();
+  const [isLogIn, setIsLogin] = useState<boolean>(true);
+  const { register, handleSubmit, formState: { errors } } = useForm<AuthFields>();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-
-  const onFieldsChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const name = event.target.name;
-    const value = event.target.value;
-    setFormFields({...formFields, [name]: value});
+  const handleErrors = (fieldName: FormField) => {
+    const errorMessage = errors[fieldName]?.message;
+    return errorMessage ? (<p className="alert-danger">{errorMessage}</p>) : null;
   };
 
-  const onFormSubmit = (event: FormEvent) => {
-    event.preventDefault();
+  const onSubmit = (formValues: AuthFields) => {
     if (isLogIn) {
+      AuthService.login(formValues).then((newUser) => {
+        if (newUser) {
+          dispatch(setUser(newUser));
+          navigate("/");
+        }
+      });
     } else {
-      AuthService.register(formFields).then(res => console.log(res));
+      AuthService.register(formValues).then((newUser) => {
+        if (newUser) {
+          dispatch(setUser(newUser));
+          navigate("/");
+        }
+      });
     }
   };
 
   return (
     <div className="auth__container">
-      <form className="auth__form" onSubmit={onFormSubmit}>
+      <form className="auth__form" onSubmit={handleSubmit(onSubmit)}>
         <label>
           Email:
-          <input className="form-control" type="email" name="email" onChange={onFieldsChange} required />
+          <input className="form-control"
+                 type="email" {...register("email", validationRules.email)} />
+          {handleErrors("email")}
         </label>
         <label>
           Password:
-          <input className="form-control" type="password" name="password" onChange={onFieldsChange} minLength={6}
-                 required />
+          <input className="form-control" type="password" {...register("password", validationRules.password)} />
+          {handleErrors("password")}
         </label>
         <div className="btn-container">
-          <button type="submit" className="btn btn-outline-success">{isLogIn ? "Log In" : "Sign In"}</button>
+          <button type="submit" className="btn btn-outline-success">{isLogIn ? "Log In" : "Sign Up"}</button>
           <button type="button"
                   className="btn btn-outline-primary"
                   onClick={() => setIsLogin(!isLogIn)}
