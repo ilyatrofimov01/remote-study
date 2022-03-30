@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/configureStore";
 import { setAuthenticated } from "../../redux/reducers/Auth/reducer";
 import { useLogout } from "../../hooks";
-
+ 
 
 export const App = () => {
   const { user, auth } = useSelector((state: RootState) => state);
