@@ -3,13 +3,8 @@ import { NavDropdown } from "react-bootstrap";
 import { logo, noProfileImage } from "../../assets/img";
 import { NavLink } from "react-router-dom";
 import "./Header.scss";
-import { useDispatch } from "react-redux";
 
-export const Header = () => {
-  const dispatch = useDispatch();
-  const onLogOut = () => {
-    //dispatch()
-  };
+export const Header = ({ onLogOut, isLogin }: { onLogOut: Function, isLogin: boolean }) => {
 
   return (
     <nav className="header__container">
@@ -31,16 +26,19 @@ export const Header = () => {
         </ul>
       </div>
 
-      <NavDropdown
-        title={
-          <img src={noProfileImage} className="profile-image" alt="profile image" />
-        }
-      >
-        <NavDropdown.Item>My Profile</NavDropdown.Item>
-        <NavDropdown.Item>Settings</NavDropdown.Item>
-        <NavDropdown.Divider />
-        <NavDropdown.Item onClick={() => onLogOut()}>Log out</NavDropdown.Item>
-      </NavDropdown>
+      {isLogin ?
+        (<NavDropdown
+          title={<img src={noProfileImage} className="profile-image" alt="profile image" />}>
+          <NavDropdown.Item>My Profile</NavDropdown.Item>
+          <NavDropdown.Item>Settings</NavDropdown.Item>
+          <NavDropdown.Divider />
+          <NavDropdown.Item onClick={() => onLogOut()}>Log out</NavDropdown.Item>
+        </NavDropdown>)
+        :
+        (<div className="sign-link__container">
+            <NavLink className="sign-link" to={"/auth"}>Sign In</NavLink>
+          </div>
+        )}
     </nav>
   );
 };

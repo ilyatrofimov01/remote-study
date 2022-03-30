@@ -2,79 +2,116 @@
 @import '../../stylesheets/fonts';
 
 .header {
-  &__container{
+  &__container {
     display: flex;
     justify-content: space-between;
     flex-direction: row;
     background-color: $light-mint;
     padding: 0.75rem;
-    }
-  &__nav-controls{
+  }
+
+  &__nav-controls {
     display: flex;
     justify-content: flex-start;
     flex-direction: row;
   }
-  &__title{
+
+  &__title {
     display: flex;
     flex-direction: row;
     align-content: center;
     font-family: $font-arvo;
     font-weight: bold;
-    h2{
+
+    h2 {
       margin: 0 0 0 1rem;
       font-size: 2rem;
       line-height: 4rem;
-      &:hover{
+
+      &:hover {
         color: $light-warm;
       }
     }
-    img{
+
+    img {
       width: 4rem;
       height: 4rem;
     }
   }
-  &__link{
+
+  &__link {
     font-size: 1.25rem;
-    & a.active{
+
+    & a.active {
       color: $ocean;
     }
   }
 }
 
-ul{
+ul {
   display: flex;
   flex-direction: row;
   padding: 0;
   margin: 0 0 0 1rem;
+
   li {
     margin: 0 0.5rem;
     list-style: none;
   }
 }
+
 a {
   color: $light-warm;
   text-decoration: none;
   line-height: 64px;
+
+  &:hover {
+    color: $ocean;
+  }
 }
-.profile-image{
+
+.profile-image {
   width: 3rem;
   height: 3rem;
   border-radius: 100%;
 }
 
-.dropdown-toggle.nav-link{
+.dropdown-toggle.nav-link {
   padding: 0;
-  &::after{
+
+  &::after {
     display: none !important;
   }
 }
-.dropdown-menu{
+
+.dropdown-menu {
   background-color: $ocean;
   width: fit-content;
   min-width: 8rem;
   max-width: 8rem;
 }
-.dropdown-item{
+
+.dropdown-item {
   color: $light-warm;
   line-height: 2rem;
+}
+
+.sign-link__container {
+  display: flex;
+  align-items: center;
+}
+
+.sign-link {
+  color: $ocean;
+  line-height: 1rem;
+  border: 1px solid $dark-ocean;
+  padding: 0.5rem;
+  border-radius: 4px;
+
+  &:hover {
+    transition: 0.3s;
+    border-color: $light-warm;
+    color: $light-warm;
+  }
+
 }

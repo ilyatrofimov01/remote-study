@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { validationRules } from "./validationRules";
 import { AuthFields, AuthService } from "../../services/Auth/AuthService";
 import { useDispatch } from "react-redux";
-import { setUser } from "../../redux/reducers/User/actions";
+import { setUser } from "../../redux/reducers/User/reducer";
 import "./Auth.scss";
 
 type FormField = "email" | "password"

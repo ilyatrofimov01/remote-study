@@ -1,4 +1,5 @@
-import { User, UserActions, UserActionTypes } from "./types";
+import { User } from "./types";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 
 const initialState: User = {
@@ -15,14 +16,14 @@ const getLocalUser = (): User => {
   }
   return initialState;
 };
-// should remove any action but it bakes configure store
-export const userReducer = (state: User = getLocalUser(), action: UserActions): User => {
-  switch (action.type) {
-    case UserActionTypes.SET_USER :
-      return { ...action.payload, ...state };
-    case UserActionTypes.LOG_OUT_USER:
-      return initialState;
-    default:
-      return state;
+
+export const userSlice = createSlice({
+  name: "user",
+  initialState: getLocalUser(),
+  reducers: {
+    setUser: (state, action: PayloadAction<User>) => state = { ...state, ...action.payload },
+    logOutUser: (state) => initialState
   }
-};
+});
+
+export const { setUser, logOutUser } = userSlice.actions;
