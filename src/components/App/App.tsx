@@ -1,18 +1,25 @@
 import React, { useEffect, useRef } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { Header } from "../Header";
 import { Auth } from "../Auth";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/configureStore";
 import { setAuthenticated } from "../../redux/reducers/Auth/reducer";
 import { useLogout } from "../../hooks";
- 
+import { PrivateRoute } from "../PrivateRoute/PrivateRoute";
+import { VideoPage } from "../VideoPage";
+import { HomePage } from "../HomePage";
+import { axiosAuthInterceptor } from "../../utils";
 
 export const App = () => {
   const { user, auth } = useSelector((state: RootState) => state);
   const logout = useLogout();
   const dispatch = useDispatch();
   let logoutTimer = useRef<any>();
+
+  useEffect(() => {
+    axiosAuthInterceptor();
+  }, [user]);
 
   useEffect(() => autoAuth(), [user.token]);
 
@@ -36,10 +43,16 @@ export const App = () => {
   return (
     <div>
       <Header onLogOut={onLogOut} isLogin={auth.authenticated} />
-      <Routes>
-        <Route path="/auth" element={<Auth />}>
-        </Route>
-      </Routes>
+      <div className="container-lg">
+        <Routes>
+          <Route path="/" element={<Navigate to={"/home"} />} />
+          <Route path="/auth" element={<Auth />} />
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/videos" element={<PrivateRoute />}>
+            <Route path="/videos" element={<VideoPage />} />
+          </Route>
+        </Routes>
+      </div>
     </div>
   );
 };

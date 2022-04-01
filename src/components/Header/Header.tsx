@@ -9,17 +9,17 @@ export const Header = ({ onLogOut, isLogin }: { onLogOut: Function, isLogin: boo
   return (
     <nav className="header__container">
       <div className="header__nav-controls">
-        <NavLink to={"/"} className="header__title">
+        <NavLink to={"/home"} className="header__title">
           <img src={logo} alt="logo" />
           <h2>RemoteStudy</h2>
         </NavLink>
         <ul>
           <li className="header__link">
-            <NavLink to={"/"}> Home </NavLink>
+            <NavLink to={"/home"}> Home </NavLink>
           </li>
-          <li className="header__link">
+          {isLogin && (<li className="header__link">
             <NavLink to={"/videos"}> Videos </NavLink>
-          </li>
+          </li>)}
           <li className="header__link">
             <NavLink to={"/price"}> Price </NavLink>
           </li>

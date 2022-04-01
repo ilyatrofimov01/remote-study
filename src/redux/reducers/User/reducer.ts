@@ -6,7 +6,8 @@ const initialState: User = {
   email: "",
   token: "",
   userId: "",
-  expirationDate: new Date()
+  expirationDate: new Date(),
+  userPermission: "user"
 };
 
 const getLocalUser = (): User => {

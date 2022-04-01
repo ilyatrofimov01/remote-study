@@ -66,6 +66,7 @@ a {
   line-height: 64px;
 
   &:hover {
+    transition: 0.3s;
     color: $ocean;
   }
 }

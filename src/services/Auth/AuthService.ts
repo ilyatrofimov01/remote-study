@@ -1,10 +1,12 @@
 import { apiKey, AuthUrls } from "./authUrlTools";
 import axios from "axios";
-import { User } from "../../redux/reducers/User/types";
+import { PermissionRole, User } from "../../redux/reducers/User/types";
+
 
 export interface AuthFields {
   email: string,
-  password: string
+  password: string,
+  permissionRole?: PermissionRole
 }
 
 interface AuthResponse {
@@ -18,12 +20,24 @@ interface AuthResponse {
   registered?: boolean
 }
 
-const AuthHandler = (userData: AuthResponse) => {
+const AuthHandler = async (userData: AuthResponse, permissionRole?: PermissionRole | undefined) => {
   const expirationDate = new Date(new Date().getTime() + parseInt(userData.expiresIn) * 1000);
+  let userPermission;
+  if (permissionRole) {
+    await axios.put(
+      `https://remote-study-school-default-rtdb.europe-west1.firebasedatabase.app/users/${userData.localId}.json?auth=${userData.idToken}`,
+      { userPermission: permissionRole });
+    userPermission = permissionRole;
+  } else {
+    const res = await axios.get(`https://remote-study-school-default-rtdb.europe-west1.firebasedatabase.app/users/${userData.localId}.json`);
+    userPermission = res.data.userPermission;
+  }
+
   const newUser: User = {
     email: userData.email,
     token: userData.idToken,
     userId: userData.localId,
+    userPermission,
     expirationDate
   };
   localStorage.setItem("userData", JSON.stringify(newUser));
@@ -32,9 +46,9 @@ const AuthHandler = (userData: AuthResponse) => {
 
 export const AuthService = {
 
-  register: async ({ email, password }: AuthFields) => {
+  register: async ({ email, password, permissionRole }: AuthFields) => {
     return axios.post(`${AuthUrls.signUp}?key=${apiKey}`, { email, password, returnSecureToken: true })
-      .then((res) => AuthHandler(res.data)).catch((error) => errorHandler(error.response.data.error.message));
+      .then((res) => AuthHandler(res.data, permissionRole)).catch((error) => errorHandler(error.response.data.error.message));
   },
   login: async ({ email, password }: AuthFields) => {
     return axios.post(`${AuthUrls.signIn}?key=${apiKey}`, { email, password, returnSecureToken: true })

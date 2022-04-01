@@ -8,5 +8,8 @@ export const validationRules = {
   password: {
     required: errorValidMessages.required,
     minLength: { value: 6, message: errorValidMessages.passwordMinLength }
+  },
+  permissionSelect: {
+    required: errorValidMessages.required
   }
 };

@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../../redux/reducers/User/reducer";
 import "./Auth.scss";
 
-type FormField = "email" | "password"
+type FormField = "email" | "password" | "permissionRole"
 
 
 export const Auth = () => {
@@ -32,6 +32,7 @@ export const Auth = () => {
     } else {
       AuthService.register(formValues).then((newUser) => {
         if (newUser) {
+
           dispatch(setUser(newUser));
           navigate("/");
         }
@@ -43,7 +44,7 @@ export const Auth = () => {
     <div className="auth__container">
       <form className="auth__form" onSubmit={handleSubmit(onSubmit)}>
         <label>
-          Email:
+          Email Address:
           <input className="form-control"
                  type="email" {...register("email", validationRules.email)} />
           {handleErrors("email")}
@@ -53,6 +54,18 @@ export const Auth = () => {
           <input className="form-control" type="password" {...register("password", validationRules.password)} />
           {handleErrors("password")}
         </label>
+        {
+          !isLogIn && (
+            <label>
+              Account Type
+              <select className="form-select" {...register("permissionRole", validationRules.permissionSelect)}>
+                <option value="admin">Teacher</option>
+                <option value="user">Student</option>
+              </select>
+            </label>
+
+          )
+        }
         <div className="btn-container">
           <button type="submit" className="btn btn-outline-success">{isLogIn ? "Log In" : "Sign Up"}</button>
           <button type="button"
