@@ -3,8 +3,12 @@ import { NavDropdown } from "react-bootstrap";
 import { logo, noProfileImage } from "../../assets/img";
 import { NavLink } from "react-router-dom";
 import "./Header.scss";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/configureStore";
 
 export const Header = ({ onLogOut, isLogin }: { onLogOut: Function, isLogin: boolean }) => {
+
+  const { userPermission } = useSelector((state: RootState) => state.user);
 
   return (
     <nav className="header__container">
@@ -15,14 +19,19 @@ export const Header = ({ onLogOut, isLogin }: { onLogOut: Function, isLogin: boo
         </NavLink>
         <ul>
           <li className="header__link">
-            <NavLink to={"/home"}> Home </NavLink>
+            <NavLink to={"/home"}>Home</NavLink>
           </li>
           {isLogin && (<li className="header__link">
-            <NavLink to={"/videos"}> Videos </NavLink>
+            <NavLink to={"/videos"}>Videos</NavLink>
           </li>)}
           <li className="header__link">
-            <NavLink to={"/price"}> Price </NavLink>
+            <NavLink to={"/price"}>Price</NavLink>
           </li>
+          {userPermission === "admin" && (
+            <li className="header__link">
+              <NavLink to={"/courses"}>Courses</NavLink>
+            </li>
+          )}
         </ul>
       </div>
 

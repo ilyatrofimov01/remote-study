@@ -2,7 +2,7 @@
 
 .btn-outline-primary {
   border-color: $ocean;
-  color: $ocean;;
+  color: $ocean;
 
   &:hover {
     color: #fff;
@@ -12,6 +12,21 @@
 
   &:focus {
     box-shadow: 0 0 0 0.25rem rgba($ocean, 0.5);
+  }
+
+  &.dark {
+    border-color: $dark-ocean;
+    color: $dark-ocean;
+
+    &:hover {
+      color: #fff;
+      background-color: $dark-ocean;
+      border-color: $dark-ocean;
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 0.25rem rgba($dark-ocean, 0.5);
+    }
   }
 }
 
@@ -28,5 +43,36 @@
   &:focus {
     box-shadow: 0 0 0 0.25rem rgba($light-mint, 0.5);
     opacity: 0.5;
+  }
+}
+
+@mixin buttonPrimarySet($colour) {
+
+  background-color: $colour;
+  color: #fff;
+
+  border-color: $colour;
+
+  &:hover {
+    color: $colour;
+    border-color: $colour;
+    background-color: #fff;
+
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 0.25rem rgba($colour, 0.5);
+  }
+
+}
+
+.btn-primary {
+
+  &.ocean {
+    @include buttonPrimarySet($ocean);
+  }
+
+  &.brown {
+    @include buttonPrimarySet($brown);
   }
 }

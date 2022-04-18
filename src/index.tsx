@@ -6,6 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import { store } from "./redux/configureStore";
 
 import "./stylesheets/reset.scss";
+import "./index.scss";
 
 
 ReactDOM.render(

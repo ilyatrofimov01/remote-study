@@ -10,6 +10,7 @@ import { PrivateRoute } from "../PrivateRoute/PrivateRoute";
 import { VideoPage } from "../VideoPage";
 import { HomePage } from "../HomePage";
 import { axiosAuthInterceptor } from "../../utils";
+import { CoursesPage } from "../CoursesPage";
 
 export const App = () => {
   const { user, auth } = useSelector((state: RootState) => state);
@@ -19,7 +20,7 @@ export const App = () => {
 
   useEffect(() => {
     axiosAuthInterceptor();
-  }, [user]);
+  }, [localStorage.getItem("user")]);
 
   useEffect(() => autoAuth(), [user.token]);
 
@@ -46,10 +47,13 @@ export const App = () => {
       <div className="container-lg">
         <Routes>
           <Route path="/" element={<Navigate to={"/home"} />} />
-          <Route path="/auth" element={<Auth />} />
           <Route path="/home" element={<HomePage />} />
+          <Route path="/auth" element={<Auth />} />
           <Route path="/videos" element={<PrivateRoute />}>
             <Route path="/videos" element={<VideoPage />} />
+          </Route>
+          <Route path="/courses" element={<PrivateRoute />}>
+            <Route path="/courses" element={<CoursesPage />} />
           </Route>
         </Routes>
       </div>

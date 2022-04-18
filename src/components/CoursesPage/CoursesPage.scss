@@ -1,0 +1,42 @@
+.courses-container {
+  display: flex;
+  padding: 20px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  flex-basis: 25%;
+
+  .card {
+    width: 20%;
+    margin-bottom: 40px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+
+    //&:hover {
+    //  transition: .35s;
+    //  transform: scale(1.1);
+    //}
+  }
+}
+
+.courses-container:hover .card {
+  filter: blur(2px);
+  transform: scale(0.9);
+  opacity: 0.5;
+  transition: .35s;
+
+}
+
+.courses-container .card:hover {
+  filter: blur(0px);
+  transform: scale(1.1);
+  opacity: 1;
+  transition: .35s;
+}
+
+//.card {
+//  width: 28%;
+//
+//  &:hover {
+//    width: 29%;
+//    transition: 0.4s;
+//  }
+//}

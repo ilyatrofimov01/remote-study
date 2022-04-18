@@ -1,0 +1,63 @@
+@import "../../../stylesheets/main-colors";
+@import "../../../stylesheets/fonts";
+
+.card {
+  padding: 0.75rem;
+
+  .card-title {
+    text-align: center;
+    font-weight: bold;
+  }
+
+  img {
+    border: 1px solid $ocean;
+    width: auto;
+    max-height: 65%;
+  }
+
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  .card-buttons {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 1rem;
+
+    & button {
+      margin-right: 0.75rem;
+
+      svg {
+        fill: #fff;
+        width: 1.5rem;
+      }
+
+      &:hover {
+        svg {
+          fill: $dark-ocean
+        }
+      }
+    }
+  }
+
+  &.new-course {
+    justify-content: space-between;
+  }
+
+  .create-new-banner {
+    width: auto;
+    max-height: 65%;
+    background-color: $ocean;
+    font-size: 4rem;
+    color: #fff;
+    font-family: $font-arvo;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+}
