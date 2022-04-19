@@ -11,6 +11,7 @@ import { VideoPage } from "../VideoPage";
 import { HomePage } from "../HomePage";
 import { axiosAuthInterceptor } from "../../utils";
 import { CoursesPage } from "../CoursesPage";
+import { CreateNewCoursePage } from "../CreateNewCoursePage";
 
 export const App = () => {
   const { user, auth } = useSelector((state: RootState) => state);
@@ -54,6 +55,7 @@ export const App = () => {
           </Route>
           <Route path="/courses" element={<PrivateRoute />}>
             <Route path="/courses" element={<CoursesPage />} />
+            <Route path="/courses/create-new" element={<CreateNewCoursePage />} />
           </Route>
         </Routes>
       </div>
