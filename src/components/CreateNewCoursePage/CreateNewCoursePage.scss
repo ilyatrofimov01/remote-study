@@ -1,0 +1,22 @@
+.create-new-course {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.form-container {
+  width: 35%;
+}
+
+.new-course__form {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.prevention-message {
+  font-weight: 300;
+  font-size: .75rem;
+}
+
